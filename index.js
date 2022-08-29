@@ -20,6 +20,16 @@ const addBook = (title, author, pages, read) => {
   library.push(newBook);
 };
 
+const removeBook = (e) => {
+  console.log(e.target.id);
+  library.splice(e.target.id.slice(-1), 1);
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    card.remove();
+  });
+  showBooks();
+};
+
 const showBooks = () => {
   for (let i = 0; i < library.length; i++) {
     const card = document.createElement("div");
@@ -46,23 +56,15 @@ const showBooks = () => {
     readButton.classList = "read-button";
     card.appendChild(readButton);
     const close = document.createElement("img");
+    close.id = `closeButton${[i]}`;
     close.src = "assets/images/x-solid.svg";
+    close.addEventListener("click", removeBook);
     close.classList = "close-button";
     card.appendChild(close);
   }
 };
 
 showBooks();
-
-const removeBook = (e) => {
-  console.log(e);
-};
-
-const closeButton = document.querySelectorAll(".close-button");
-let closeButtonArr = Array.from(closeButton);
-closeButtonArr.forEach((button) => {
-  button.addEventListener("click", removeBook);
-});
 
 const addBookButton = () => {
   const modal = document.querySelector(".modal");
@@ -92,6 +94,7 @@ const bookSubmitButton = (e) => {
   cards.forEach((card) => {
     card.remove();
   });
+  console.log(library);
   showBooks();
   const modal = document.querySelector(".modal");
   modal.style.display = "none";
