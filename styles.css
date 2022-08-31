@@ -34,7 +34,7 @@ body {
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 100px; /* Location of the box */
+  padding-top: 15%; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%;
@@ -49,8 +49,11 @@ body {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 40%;
   height: auto;
+}
+
+.form-title {
 }
 
 .card {
@@ -83,7 +86,7 @@ body {
 }
 
 .read-button {
-  width: 50px;
+  width: 150px;
   height: 30px;
   padding: 5px 10px;
   grid-area: 5 / 1 / 6 / 5;

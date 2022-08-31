@@ -1,7 +1,4 @@
-let library = [
-  { title: "harry Potter", author: "jkr", pages: 420, read: "read" },
-  { title: "harry Potter2", author: "jkr2", pages: 42069, read: "not read" },
-];
+let library = [];
 
 const container = document.querySelector(".container-wrapper");
 
@@ -9,9 +6,17 @@ function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
+  this.read = read === "read" ? true : false;
   this.info = () => {
     return `${title} by ${author} has ${pages}. Read status: ${read}`;
+  };
+  this.statusChange = function () {
+    this.read = !this.read;
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => {
+      card.remove();
+    });
+    showBooks();
   };
 }
 
@@ -20,8 +25,13 @@ const addBook = (title, author, pages, read) => {
   library.push(newBook);
 };
 
+const changeReadStatus = (e) => {
+  const bookIndex = e.target.id.slice(-1);
+  // library[bookIndex].statusChange();
+  library[bookIndex].statusChange();
+};
+
 const removeBook = (e) => {
-  console.log(e.target.id);
   library.splice(e.target.id.slice(-1), 1);
   const cards = document.querySelectorAll(".card");
   cards.forEach((card) => {
@@ -49,11 +59,13 @@ const showBooks = () => {
     card.appendChild(pagesDiv);
     const readDiv = document.createElement("div");
     readDiv.classList = "read-div";
-    readDiv.innerHTML = `Read: ${library[i].read}`;
+    readDiv.innerHTML = `${library[i].read ? "Read" : "Not Read"}`;
     card.appendChild(readDiv);
     const readButton = document.createElement("button");
-    readButton.innerHTML = "Read";
+    readButton.id = `readButton${i}`;
+    readButton.innerHTML = `Change status`;
     readButton.classList = "read-button";
+    readButton.addEventListener("click", changeReadStatus);
     card.appendChild(readButton);
     const close = document.createElement("img");
     close.id = `closeButton${[i]}`;
@@ -94,7 +106,6 @@ const bookSubmitButton = (e) => {
   cards.forEach((card) => {
     card.remove();
   });
-  console.log(library);
   showBooks();
   const modal = document.querySelector(".modal");
   modal.style.display = "none";
