@@ -46,19 +46,19 @@ const showBooks = () => {
     card.classList = "card";
     container.appendChild(card);
     const titleDiv = document.createElement("div");
-    titleDiv.classList = "title-div";
+    titleDiv.classList = "title-div card-content";
     titleDiv.innerHTML = `${library[i].title}`;
     card.appendChild(titleDiv);
     const authorDiv = document.createElement("div");
-    authorDiv.classList = "author-div";
+    authorDiv.classList = "author-div card-content";
     authorDiv.innerHTML = `${library[i].author}`;
     card.appendChild(authorDiv);
     const pagesDiv = document.createElement("div");
-    pagesDiv.classList = "pages-div";
+    pagesDiv.classList = "pages-div card-content";
     pagesDiv.innerHTML = `Pages: ${library[i].pages}`;
     card.appendChild(pagesDiv);
     const readDiv = document.createElement("div");
-    readDiv.classList = "read-div";
+    readDiv.classList = "read-div card-content";
     readDiv.innerHTML = `${library[i].read ? "Read" : "Not Read"}`;
     card.appendChild(readDiv);
     const readButton = document.createElement("button");
@@ -113,3 +113,9 @@ const bookSubmitButton = (e) => {
 
 const submitButton = document.getElementById("book-submit-button");
 submitButton.addEventListener("click", bookSubmitButton);
+
+const modalClose = document.getElementById("form-close");
+modalClose.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  modal.style.display = "none";
+});
