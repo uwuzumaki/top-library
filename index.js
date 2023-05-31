@@ -109,13 +109,50 @@ const bookSubmitButton = (e) => {
   showBooks();
   const modal = document.querySelector(".modal");
   modal.style.display = "none";
+  const submitButton = document.getElementById("form1");
+  submitButton.reset();
 };
 
-const submitButton = document.getElementById("book-submit-button");
-submitButton.addEventListener("click", bookSubmitButton);
+//Constraint Validation API start
+//Take note: the  event listener listens for a submit on the form ID, not
+//the ID of the submit button. It also listens for a submit event and not
+//a click event.
+const submitButton = document.getElementById("form1");
+submitButton.addEventListener("submit", bookSubmitButton);
+
+const title2 = document.getElementById("title");
+title2.addEventListener("input", (e) => {
+  if (title2.validity.tooShort) {
+    title2.setCustomValidity("Book title must be at least 5 characters long.");
+  } else {
+    title2.setCustomValidity("");
+  }
+});
+
+const author2 = document.getElementById("author");
+author2.addEventListener("input", (e) => {
+  if (author2.validity.tooShort) {
+    author2.setCustomValidity("Author must be at least 5 characters long.");
+  } else {
+    author2.setCustomValidity("");
+  }
+});
+
+const pages2 = document.getElementById("pages");
+pages2.addEventListener("input", (e) => {
+  console.log(pages2.validity);
+  if (pages2.validity.rangeOverflow) {
+    pages2.setCustomValidity("Book page length must be below 5000 pages.");
+  } else {
+    pages2.setCustomValidity("");
+  }
+});
 
 const modalClose = document.getElementById("form-close");
 modalClose.addEventListener("click", () => {
   const modal = document.querySelector(".modal");
   modal.style.display = "none";
+
+  const form = document.getElementById("form1");
+  form.reset();
 });

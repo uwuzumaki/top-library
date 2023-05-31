@@ -22,15 +22,21 @@
           </div>
           <div class="input-div">
             <label for="title">Title:</label>
-            <input type="text" name="title" id="title" />
+            <input type="text" name="title" id="title" minlength="5" required />
           </div>
           <div class="input-div">
             <label for="author">Author:</label>
-            <input type="text" name="author" id="author" />
+            <input
+              type="text"
+              name="author"
+              id="author"
+              minlength="5"
+              required
+            />
           </div>
           <div class="input-div">
             <label for="pages">Pages:</label>
-            <input type="text" name="pages" id="pages" />
+            <input type="number" name="pages" id="pages" max="5000" required />
           </div>
           <div class="input-div">
             <label for="read">Read</label>
@@ -38,7 +44,7 @@
             <label for="not-read">Not read</label>
             <input type="radio" name="read-status" id="not-read" />
           </div>
-          <button id="book-submit-button" type="submit">Add Book</button>
+          <button id="book-submit-button">Add Book</button>
         </form>
       </div>
       <div class="footer">
